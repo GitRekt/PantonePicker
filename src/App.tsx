@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={process.env.GITHUB_PAGES === 'true' ? '/PantonePicker' : ''}>
+      <BrowserRouter basename={import.meta.env.VITE_GITHUB_PAGES === 'true' ? '/PantonePicker' : ''}>
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
