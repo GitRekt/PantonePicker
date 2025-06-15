@@ -49,10 +49,10 @@ export const ColorCard = ({ color }: ColorCardProps) => {
   const textColor = getContrastColor(color.hex);
 
   return (
-    <div className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
       {/* Color Display */}
       <div 
-        className="h-48 w-full relative cursor-pointer transition-all duration-300 group-hover:scale-105"
+        className="h-40 sm:h-48 w-full relative cursor-pointer transition-all duration-500 group-hover:scale-105"
         style={{ backgroundColor: color.hex }}
         onClick={() => copyToClipboard(color.hex)}
       >
