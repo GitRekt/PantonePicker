@@ -56,13 +56,13 @@ const Index = () => {
             <div className="hidden sm:block w-px h-12 bg-border" />
             <div className="sm:hidden w-12 h-px bg-border" />
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">25</div>
+              <div className="text-2xl sm:text-3xl font-bold text-primary">26</div>
               <div className="text-xs sm:text-sm text-muted-foreground">Years Covered</div>
             </div>
             <div className="hidden sm:block w-px h-12 bg-border" />
             <div className="sm:hidden w-12 h-px bg-border" />
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">2000-2024</div>
+              <div className="text-2xl sm:text-3xl font-bold text-primary">2000-2025</div>
               <div className="text-xs sm:text-sm text-muted-foreground">Time Span</div>
             </div>
           </div>

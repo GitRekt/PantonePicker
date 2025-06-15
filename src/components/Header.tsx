@@ -23,7 +23,7 @@ export const Header = () => {
         </h2>
         
         <p className="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto opacity-90 leading-relaxed animate-fade-in px-4" style={{animationDelay: '0.4s'}}>
-          Explore the complete collection of Pantone Colors of the Year from 2000 to 2024. 
+          Explore the complete collection of Pantone Colors of the Year from 2000 to 2025. 
           Each color tells a story of its time, capturing the mood and spirit of the era. 
           Click any color to copy its hex code for your design projects.
         </p>
