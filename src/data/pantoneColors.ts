@@ -4,9 +4,18 @@ export interface PantoneColor {
   hex: string;
   pantoneCode: string;
   description: string;
+  formula?: string;
 }
 
 export const pantoneColorsData: PantoneColor[] = [
+  {
+    year: 2025,
+    name: "Mocha Mousse",
+    hex: "#A47864",
+    pantoneCode: "PANTONE 17-1230",
+    description: "A warming, rich brown with sophisticated depth that brings comfort and grounding.",
+    formula: "0.0780% Pigment Blue CI 29 Green Shade\n0.2560% Pigment Yellow CI 119\n0.3680% Pigment White CI 6\n0.0100% Pigment Red CI 122"
+  },
   {
     year: 2024,
     name: "Peach Fuzz",

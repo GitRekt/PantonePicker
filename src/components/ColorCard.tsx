@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, Info } from 'lucide-react';
 import { PantoneColor } from '@/data/pantoneColors';
 import { useToast } from '@/hooks/use-toast';
 
@@ -9,6 +9,7 @@ interface ColorCardProps {
 
 export const ColorCard = ({ color }: ColorCardProps) => {
   const [copied, setCopied] = useState(false);
+  const [showFormula, setShowFormula] = useState(false);
   const { toast } = useToast();
 
   const copyToClipboard = async (text: string) => {
@@ -49,80 +50,87 @@ export const ColorCard = ({ color }: ColorCardProps) => {
   const textColor = getContrastColor(color.hex);
 
   return (
-    <div className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
-      {/* Color Display */}
+    <div className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+      {/* Main Color Chip */}
       <div 
-        className="h-40 sm:h-48 w-full relative cursor-pointer transition-all duration-500 group-hover:scale-105"
+        className="relative aspect-square w-full cursor-pointer transition-all duration-300"
         style={{ backgroundColor: color.hex }}
-        onClick={() => copyToClipboard(color.hex)}
+        onClick={() => color.formula ? setShowFormula(!showFormula) : copyToClipboard(color.hex)}
       >
-        {/* Year Badge */}
-        <div className="absolute top-4 left-4">
-          <span 
-            className="px-3 py-1 rounded-full text-sm font-bold backdrop-blur-sm bg-black/20"
-            style={{ color: textColor }}
-          >
-            {color.year}
-          </span>
-        </div>
+        {/* Small white circle (hole) */}
+        <div className="absolute top-3 right-3 w-3 h-3 bg-white rounded-full shadow-sm" />
+        
+        {/* Formula/Info Button for colors with formula */}
+        {color.formula && (
+          <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowFormula(!showFormula);
+              }}
+              className="p-1.5 rounded-full backdrop-blur-sm bg-black/20 hover:bg-black/30 transition-colors duration-200"
+            >
+              <Info size={14} style={{ color: textColor }} />
+            </button>
+          </div>
+        )}
         
         {/* Copy Button */}
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-3 right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
             onClick={(e) => {
               e.stopPropagation();
               copyToClipboard(color.hex);
             }}
-            className="p-2 rounded-full backdrop-blur-sm bg-black/20 hover:bg-black/30 transition-colors duration-200"
+            className="p-1.5 rounded-full backdrop-blur-sm bg-black/20 hover:bg-black/30 transition-colors duration-200"
           >
             {copied ? (
-              <Check size={16} style={{ color: textColor }} />
+              <Check size={14} style={{ color: textColor }} />
             ) : (
-              <Copy size={16} style={{ color: textColor }} />
+              <Copy size={14} style={{ color: textColor }} />
             )}
           </button>
         </div>
+      </div>
 
-        {/* Color Name Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
-          <h3 
-            className="text-lg font-bold mb-1"
-            style={{ color: textColor }}
-          >
-            {color.name}
-          </h3>
-          <p 
-            className="text-sm opacity-90"
-            style={{ color: textColor }}
-          >
-            {color.pantoneCode}
-          </p>
+      {/* Bottom Label Section */}
+      <div className="bg-white p-3 border-t">
+        <div className="text-center">
+          <div className="text-lg font-bold text-black mb-1">PANTONE®</div>
+          <div className="text-sm font-semibold text-black">{color.pantoneCode}</div>
         </div>
       </div>
 
-      {/* Card Info */}
-      <div className="p-6 bg-card">
-        <div className="flex items-center justify-between mb-3">
-          <div 
-            className="px-3 py-1 rounded-md font-mono text-sm font-semibold cursor-pointer hover:bg-accent transition-colors duration-200"
-            onClick={() => copyToClipboard(color.hex)}
-            title="Click to copy"
-          >
-            {color.hex}
+      {/* Formula Overlay */}
+      {color.formula && (
+        <div 
+          className={`absolute inset-0 bg-card p-4 transition-all duration-500 ${
+            showFormula ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full pointer-events-none'
+          }`}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="font-bold text-foreground">Formula</h4>
+            <button
+              onClick={() => setShowFormula(false)}
+              className="p-1 rounded hover:bg-accent transition-colors duration-200"
+            >
+              <Check size={16} />
+            </button>
           </div>
-          <button
-            onClick={() => copyToClipboard(color.hex)}
-            className="p-1 rounded hover:bg-accent transition-colors duration-200"
-            title="Copy hex code"
-          >
-            {copied ? <Check size={16} className="text-green-600" /> : <Copy size={16} />}
-          </button>
+          
+          <div className="text-xs text-muted-foreground space-y-1">
+            {color.formula.split('\n').map((line, index) => (
+              <div key={index} className="font-mono">{line}</div>
+            ))}
+          </div>
+          
+          {/* Color info */}
+          <div className="mt-4 pt-3 border-t border-border">
+            <div className="text-sm font-semibold text-foreground mb-1">{color.name}</div>
+            <div className="text-xs text-muted-foreground">{color.year}</div>
+          </div>
         </div>
-        
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {color.description}
-        </p>
-      </div>
+      )}
     </div>
   );
 };
