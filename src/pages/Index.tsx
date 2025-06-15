@@ -39,10 +39,18 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Glass Background Overlay */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
+        <div className="absolute inset-0 glass opacity-30" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-white/3 to-transparent" />
+      </div>
+      
       <Header />
       
-      <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
         {/* Stats */}
         <div 
           ref={statsRef}
