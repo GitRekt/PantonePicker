@@ -8,6 +8,13 @@ export interface PantoneColor {
 
 export const pantoneColorsData: PantoneColor[] = [
   {
+    year: 2025,
+    name: "Mocha Mousse",
+    hex: "#A47864",
+    pantoneCode: "PANTONE 17-1230",
+    description: "A warming, rich brown with sophisticated depth that brings comfort and grounding in uncertain times."
+  },
+  {
     year: 2024,
     name: "Peach Fuzz",
     hex: "#FFBE98",
