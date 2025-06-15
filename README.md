@@ -1,6 +1,8 @@
 
 # Pantone Color of the Year Explorer
 
+[**Live Demo**](https://gitrekt.github.io/PantonePicker/)
+
 This project helps web designers and developers explore the complete collection of Pantone Colors of the Year, from 2000 to 2025. It provides a simple interface to view all the colors in one place and easily copy their hex codes for use in your own design projects.
 
 ## Features
@@ -41,4 +43,3 @@ This project is built with:
 - TypeScript
 - Tailwind CSS
 - shadcn/ui
-
