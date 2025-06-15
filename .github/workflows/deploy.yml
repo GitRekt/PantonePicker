@@ -27,6 +27,8 @@ jobs:
       run: npm ci
       
     - name: Build
+      env:
+        VITE_GHPAGES_BUILD: "true"
       run: npm run build
       
     - name: Setup Pages
